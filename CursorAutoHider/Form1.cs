@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Gma.System.MouseKeyHook;
+using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
@@ -7,10 +8,13 @@ namespace CursorAutoHider
 {
     public partial class Form1 : Form
     {
+        private IKeyboardMouseEvents m_GlobalHook;
+
         Timer m_timer;
         Timer m_checkProcessTimer = new Timer();
         Point? m_lastMousePosition;
         DateTime? m_lastTime;
+        volatile bool m_mouseClicked;
 
         int m_distanceThreshold = 5;
         int m_timeThresholdS = 3;
@@ -32,7 +36,17 @@ namespace CursorAutoHider
             m_checkProcessTimer.Interval = 1000;
             m_checkProcessTimer.Tick += CheckProcessTimer_Tick;
             m_checkProcessTimer.Start();
+
+            m_GlobalHook = Hook.GlobalEvents();
+
+            m_GlobalHook.MouseDownExt += GlobalHookMouseDownExt;
+
             this.FormClosed += Form1_FormClosed;
+        }
+
+        private void GlobalHookMouseDownExt(object sender, MouseEventExtArgs e)
+        {
+            m_mouseClicked |= e.Clicked;
         }
 
         private void CheckProcessTimer_Tick(object sender, EventArgs e)
@@ -63,6 +77,13 @@ namespace CursorAutoHider
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
+            if (m_checkProcessTimer != null)
+                m_checkProcessTimer.Stop();
+
+            if (m_timer != null)
+                m_timer.Stop();
+
+            m_GlobalHook.MouseDownExt -= GlobalHookMouseDownExt;
             CursorsManager.Instance.RestoreCursors();
         }
 
@@ -82,9 +103,12 @@ namespace CursorAutoHider
                 double ydiff = (mousePosition.Y - m_lastMousePosition.Value.Y);
                 double distSqr = xdiff * xdiff + ydiff * ydiff;
 
+                bool mouseClicked = m_mouseClicked;
+                m_mouseClicked = false;
+
                 if ((now - m_lastTime.Value).TotalSeconds > m_timeThresholdS)
                 {
-                    if (distSqr < m_distanceThreshold)
+                    if (!mouseClicked && distSqr < m_distanceThreshold)
                         HideMouse();
                     else
                         ShowMouse();
