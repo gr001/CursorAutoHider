@@ -46,6 +46,7 @@ namespace CursorAutoHider
 
         private void GlobalHookMouseDownExt(object sender, MouseEventExtArgs e)
         {
+            //m_logControl.Items.Add("Mouse clicked: " + e.Clicked);
             m_mouseClicked |= e.Clicked;
         }
 
@@ -103,16 +104,14 @@ namespace CursorAutoHider
                 double ydiff = (mousePosition.Y - m_lastMousePosition.Value.Y);
                 double distSqr = xdiff * xdiff + ydiff * ydiff;
 
-                bool mouseClicked = m_mouseClicked;
-                m_mouseClicked = false;
-
                 if ((now - m_lastTime.Value).TotalSeconds > m_timeThresholdS)
                 {
-                    if (!mouseClicked && distSqr < m_distanceThreshold)
+                    if (!m_mouseClicked && distSqr < m_distanceThreshold)
                         HideMouse();
                     else
                         ShowMouse();
 
+                    m_mouseClicked = false;
                     m_lastTime = null;
                     m_lastMousePosition = null;
                 }

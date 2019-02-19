@@ -19,7 +19,20 @@ namespace CursorAutoHider
                 return;
 
             var screenSize = System.Windows.Forms.Screen.PrimaryScreen.WorkingArea;
-            User32.SetCursorPos(screenSize.Width / 2, screenSize.Height / 2);
+            var destPosition = new System.Drawing.Point(screenSize.Width / 2, screenSize.Height / 2);
+            var mousePosition = System.Windows.Forms.Cursor.Position;
+
+            int stepsCount = 10;
+
+            var step = new System.Drawing.Point((destPosition.X - mousePosition.X) / stepsCount, (destPosition.Y - mousePosition.Y) / stepsCount);
+
+            for(int i=0; i<=stepsCount; i++)
+            {
+                mousePosition.Offset(step);
+                System.Threading.Thread.Sleep(3);
+                User32.SetCursorPos(mousePosition.X, mousePosition.Y);
+            }
+
 
             foreach (var item in Enum.GetValues(typeof(User32.OCR_SYSTEM_CURSORS)).Cast<User32.OCR_SYSTEM_CURSORS>())
             {

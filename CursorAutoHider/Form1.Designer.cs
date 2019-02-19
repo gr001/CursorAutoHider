@@ -45,7 +45,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(105, 51);
+            this.label1.Location = new System.Drawing.Point(14, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(91, 13);
             this.label1.TabIndex = 1;
@@ -54,7 +54,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(105, 94);
+            this.label2.Location = new System.Drawing.Point(14, 58);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(90, 13);
             this.label2.TabIndex = 3;
@@ -62,7 +62,7 @@
             // 
             // m_minimumDistanceUD
             // 
-            this.m_minimumDistanceUD.Location = new System.Drawing.Point(225, 47);
+            this.m_minimumDistanceUD.Location = new System.Drawing.Point(134, 11);
             this.m_minimumDistanceUD.Name = "m_minimumDistanceUD";
             this.m_minimumDistanceUD.Size = new System.Drawing.Size(120, 20);
             this.m_minimumDistanceUD.TabIndex = 4;
@@ -74,7 +74,7 @@
             // 
             // m_timeThresholdUD
             // 
-            this.m_timeThresholdUD.Location = new System.Drawing.Point(225, 92);
+            this.m_timeThresholdUD.Location = new System.Drawing.Point(134, 56);
             this.m_timeThresholdUD.Name = "m_timeThresholdUD";
             this.m_timeThresholdUD.Size = new System.Drawing.Size(120, 20);
             this.m_timeThresholdUD.TabIndex = 5;
@@ -96,7 +96,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(190, 171);
+            this.button1.Location = new System.Drawing.Point(99, 135);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 6;
@@ -107,7 +107,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(105, 142);
+            this.label3.Location = new System.Drawing.Point(14, 106);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(105, 13);
             this.label3.TabIndex = 7;
@@ -115,7 +115,7 @@
             // 
             // m_watchedApplicationTb
             // 
-            this.m_watchedApplicationTb.Location = new System.Drawing.Point(225, 139);
+            this.m_watchedApplicationTb.Location = new System.Drawing.Point(134, 103);
             this.m_watchedApplicationTb.Name = "m_watchedApplicationTb";
             this.m_watchedApplicationTb.Size = new System.Drawing.Size(120, 20);
             this.m_watchedApplicationTb.TabIndex = 8;
@@ -124,7 +124,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(310, 187);
             this.Controls.Add(this.m_watchedApplicationTb);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.button1);
